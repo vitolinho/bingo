@@ -1,5 +1,5 @@
 export function GenerateRandomNumber(): number {
-  return Math.floor(Math.random() * 99)
+  return Math.floor(Math.random() * 98) + 1
 }
 
 export function GenerateRandomBingoTray(): number[][] {
