@@ -9,7 +9,7 @@ import { isMobile, isTablet } from '@/utils/userAgent'
 const gameStarted = ref(false)
 const gameFinished = ref(false)
 const randomNumber = ref(0)
-const language = ref(localStorage.getItem('language') || 'english')
+const language = ref(localStorage.getItem('language') || 'en')
 let intervalId: any = null
 
 function startGame() {
@@ -22,7 +22,7 @@ function startGame() {
 
 function nextNumber() {
   randomNumber.value = GenerateRandomNumber()
-  const speakLanguage = language.value === 'english' ? 'en-US' : 'fr-FR'
+  const speakLanguage = language.value === 'en' ? 'en-US' : 'fr-FR'
   speak(String(randomNumber.value), speakLanguage, () => {
     if (gameStarted.value && !gameFinished.value) {
       intervalId = setTimeout(nextNumber, 1000)
@@ -75,13 +75,13 @@ watch(language, (newLanguage) => {
 <template>
   <p v-if="isMobile || isTablet" class="w-full h-screen flex justify-center items-center">This website is not available for mobiles or tablets.</p>
   <div v-else class="w-full h-screen flex justify-center items-center">
-    <Button v-if="!gameStarted" @click="startGame">Play !</Button>
+    <Button v-if="!gameStarted" @click="startGame">{{ $t('home.play') }}</Button>
     <p v-if="gameStarted && randomNumber !== 0 && !gameFinished" class="text-9xl font-bold">{{ randomNumber }}</p>
     <div v-if="gameFinished" class="flex flex-col gap-20 w-full justify-center items-center">
       <p class="text-6xl font-bold uppercase">BINGO</p>
       <div class="flex flex-col gap-5">
-        <Button @click="RestartGame" variant="default">Restart Game</Button>
-        <Button @click="QuitGame" variant="secondary">Quit Game</Button>
+        <Button @click="RestartGame" variant="default">{{ $t('home.restart') }}</Button>
+        <Button @click="QuitGame" variant="secondary">{{ $t('home.quit') }}</Button>
       </div>
     </div>
   </div>

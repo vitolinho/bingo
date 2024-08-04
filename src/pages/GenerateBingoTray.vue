@@ -43,7 +43,7 @@ function generateMultipleBingoPdfs(quantity: number) {
 
 <template>
   <div class="w-full h-screen flex justify-center items-center flex-col gap-20 px-5">
-    <p class="font-bold text-3xl md:text-4xl">Here you can generate your bingo trays !</p>
+    <p class="font-bold text-3xl md:text-4xl">{{ $t('generate.title') }}</p>
     <form
       class="flex justify-center items-center flex-col gap-5 w-full md:w-[25rem]"
       @submit="onSubmit"
@@ -61,7 +61,7 @@ function generateMultipleBingoPdfs(quantity: number) {
           }
         }"
       >
-        <Label for="quantity">Quantity</Label>
+        <Label for="quantity">{{ $t('generate.label') }}</Label>
         <NumberFieldContent>
           <NumberFieldDecrement />
           <NumberFieldInput />
@@ -69,7 +69,7 @@ function generateMultipleBingoPdfs(quantity: number) {
         </NumberFieldContent>
       </NumberField>
       <Button :disabled="quantity <= 0" type="submit" class="w-full">
-        {{ `Download ${ quantity } Bingo trays` }}
+        {{ $t('generate.button', { quantity: quantity }) }}
       </Button>
     </form>
   </div>

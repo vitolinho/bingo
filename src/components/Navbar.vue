@@ -9,7 +9,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-const language = ref(localStorage.getItem('language') || 'english')
+const language = ref(localStorage.getItem('language') || 'en')
 
 watch(language, (newLanguage) => {
   localStorage.setItem('language', newLanguage)
@@ -35,19 +35,19 @@ onMounted(() => {
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
-            <SelectItem value="french">
+            <SelectItem value="fr">
               Français
             </SelectItem>
-            <SelectItem value="english">
+            <SelectItem value="en">
               English
             </SelectItem>
           </SelectGroup>
         </SelectContent>
       </Select>
-      <RouterLink to="/" v-if="$route.fullPath === '/'" class="font-bold">Home</RouterLink>
-      <RouterLink to="/" v-else>Home</RouterLink>
-      <RouterLink to="/" v-if="$route.fullPath === '/generate-bingo-tray'" class="font-bold">Generate</RouterLink>
-      <RouterLink v-else to="/generate-bingo-tray">Generate</RouterLink>
+      <RouterLink to="/" v-if="$route.fullPath === '/'" class="font-bold">{{ $t('navigation.home') }}</RouterLink>
+      <RouterLink to="/" v-else>{{ $t('navigation.home') }}</RouterLink>
+      <RouterLink to="/" v-if="$route.fullPath === '/generate-bingo-tray'" class="font-bold">{{ $t('navigation.generate') }}</RouterLink>
+      <RouterLink v-else to="/generate-bingo-tray">{{ $t('navigation.generate') }}</RouterLink>
     </div>
   </nav>
 </template>
