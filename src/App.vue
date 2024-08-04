@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import GenerateBingoTray from './components/GenerateBingoTray.vue';
+import Navbar from './router/Router.vue';
 </script>
 
 <template>
-  <GenerateBingoTray />
+  <Navbar />
 </template>

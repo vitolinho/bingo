@@ -42,10 +42,10 @@ function generateMultipleBingoPdfs(quantity: number) {
 </script>
 
 <template>
-  <div class="w-screen h-screen flex justify-center items-center flex-col gap-20">
-    <p class="font-bold text-4xl">Here you can generate your bingo trays !</p>
+  <div class="w-full h-screen flex justify-center items-center flex-col gap-20 px-5">
+    <p class="font-bold text-3xl md:text-4xl">Here you can generate your bingo trays !</p>
     <form
-      class="flex justify-center items-center flex-col gap-5 w-[25rem]"
+      class="flex justify-center items-center flex-col gap-5 w-full md:w-[25rem]"
       @submit="onSubmit"
     >
       <NumberField
