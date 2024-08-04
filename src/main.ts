@@ -38,7 +38,7 @@ const i18n = createI18n({
       generate: {
         title: 'Here you can generate your bingo trays !',
         label: 'Quantity',
-        button: 'Download {quantity} Bingo trays'
+        button: 'Download {quantity} Bingo tray(s)'
       }
     },
     fr: {
@@ -56,7 +56,7 @@ const i18n = createI18n({
       generate: {
         title: 'Ici vous pouvez générer vos plateaux de bingo !',
         label: 'Quantité',
-        button: 'Télécharger {quantity} plateaux de bingo'
+        button: 'Télécharger {quantity} plateau(x) de bingo'
       }
     }
   }
