@@ -29,7 +29,8 @@ const i18n = createI18n({
         play: 'Play',
         restart: 'Restart',
         quit: 'Quit',
-        label: 'If you have Bingo, press [Space] to report it'
+        label: 'If you have Bingo, press [Space] to report it',
+        gameOverTitle: 'Game over'
       },
       navigation: {
         home: 'Home',
@@ -46,7 +47,8 @@ const i18n = createI18n({
         play: 'Jouer',
         restart: 'Recommencer',
         quit: 'Quitter',
-        label: 'Si vous avez un Bingo, appuyez sur [Espace] pour le signaler'
+        label: 'Si vous avez un Bingo, appuyez sur [Espace] pour le signaler',
+        gameOverTitle: 'Perdu'
       },
       navigation: {
         home: 'Accueil',

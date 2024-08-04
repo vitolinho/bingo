@@ -12,6 +12,7 @@ const gameFinished = ref(false)
 const randomNumber = ref(0)
 const language = ref(localStorage.getItem('language') || 'en')
 let intervalId: any = null
+const usedNumbers = new Set<number>()
 
 function startGame() {
   gameStarted.value = true
@@ -22,7 +23,13 @@ function startGame() {
 }
 
 function nextNumber() {
-  randomNumber.value = GenerateRandomNumber()
+  if(usedNumbers.size >= 99) return
+  let newNumber: number
+  do {
+    newNumber = GenerateRandomNumber()
+  } while (usedNumbers.has(newNumber))
+  randomNumber.value = newNumber
+  usedNumbers.add(newNumber)
   const speakLanguage = language.value === 'en' ? 'en-US' : 'fr-FR'
   speak(String(randomNumber.value), speakLanguage, () => {
     if (gameStarted.value && !gameFinished.value) {
@@ -35,6 +42,7 @@ function QuitGame() {
   gameStarted.value = false
   gameFinished.value = false
   randomNumber.value = 0
+  usedNumbers.clear()
   if (intervalId) {
     clearInterval(intervalId)
     intervalId = null
@@ -43,6 +51,7 @@ function QuitGame() {
 
 function RestartGame() {
   gameFinished.value = false
+  usedNumbers.clear()
   startGame()
 }
 
@@ -77,12 +86,13 @@ watch(language, (newLanguage) => {
   <p v-if="isMobile || isTablet" class="w-full h-screen flex justify-center items-center">This website is not available for mobiles or tablets.</p>
   <div v-else class="w-full h-screen flex justify-center items-center">
     <Button v-if="!gameStarted" @click="startGame">{{ $t('home.play') }}</Button>
-    <div v-if="gameStarted && randomNumber !== 0 && !gameFinished" class="flex flex-col items-center gap-5">
+    <div v-if="gameStarted && randomNumber !== 0 && !gameFinished && usedNumbers.size !== 99" class="flex flex-col items-center gap-5">
       <p class="text-9xl font-bold">{{ randomNumber }}</p>
       <Label>{{ $t('home.label') }}</Label>
     </div>
-    <div v-if="gameFinished" class="flex flex-col gap-20 w-full justify-center items-center">
-      <p class="text-6xl font-bold uppercase">BINGO</p>
+    <div v-if="gameFinished || usedNumbers.size >= 99" class="flex flex-col gap-20 w-full justify-center items-center">
+      <p v-if="gameFinished" class="text-6xl font-bold uppercase">BINGO</p>
+      <p v-else-if="usedNumbers.size >= 99" class="text-6xl font-bold uppercase">{{ $t('home.gameOverTitle') }}</p>
       <div class="flex flex-col gap-5">
         <Button @click="RestartGame" variant="default">{{ $t('home.restart') }}</Button>
         <Button @click="QuitGame" variant="secondary">{{ $t('home.quit') }}</Button>
