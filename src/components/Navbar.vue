@@ -31,7 +31,7 @@ onMounted(() => {
     <div class="flex gap-5 items-center">
       <Select v-model="language">
         <SelectTrigger>
-          <SelectValue :value="language"/>
+          <SelectValue />
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
