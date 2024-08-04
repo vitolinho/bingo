@@ -1,5 +1,7 @@
+export const BALLS: number = 75
+
 export function GenerateRandomNumber(): number {
-  return Math.floor(Math.random() * 99) + 1
+  return Math.floor(Math.random() * BALLS) + 1
 }
 
 export function GenerateRandomBingoTray(): number[][] {

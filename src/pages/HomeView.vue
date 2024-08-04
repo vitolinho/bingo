@@ -2,7 +2,7 @@
 import { ref, onMounted, onUnmounted, watch } from 'vue'
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
-import { GenerateRandomNumber } from '../utils/number'
+import { GenerateRandomNumber, BALLS } from '../utils/number'
 import { ShootConfettis } from '@/utils/confetti'
 import { speak } from '@/utils/SpeechSynthesisUtterance'
 import { isMobile, isTablet } from '@/utils/userAgent'
@@ -23,7 +23,7 @@ function startGame() {
 }
 
 function nextNumber() {
-  if(usedNumbers.size >= 99) return
+  if(usedNumbers.size >= BALLS) return
   let newNumber: number
   do {
     newNumber = GenerateRandomNumber()
@@ -86,13 +86,13 @@ watch(language, (newLanguage) => {
   <p v-if="isMobile || isTablet" class="w-full h-screen flex justify-center items-center">This website is not available for mobiles or tablets.</p>
   <div v-else class="w-full h-screen flex justify-center items-center">
     <Button v-if="!gameStarted" @click="startGame">{{ $t('home.play') }}</Button>
-    <div v-if="gameStarted && randomNumber !== 0 && !gameFinished && usedNumbers.size !== 99" class="flex flex-col items-center gap-5">
+    <div v-if="gameStarted && randomNumber !== 0 && !gameFinished && usedNumbers.size !== BALLS" class="flex flex-col items-center gap-5">
       <p class="text-9xl font-bold">{{ randomNumber }}</p>
       <Label>{{ $t('home.label') }}</Label>
     </div>
-    <div v-if="gameFinished || usedNumbers.size >= 99" class="flex flex-col gap-20 w-full justify-center items-center">
+    <div v-if="gameFinished || usedNumbers.size >= BALLS" class="flex flex-col gap-20 w-full justify-center items-center">
       <p v-if="gameFinished" class="text-6xl font-bold uppercase">BINGO</p>
-      <p v-else-if="usedNumbers.size >= 99" class="text-6xl font-bold uppercase">{{ $t('home.gameOverTitle') }}</p>
+      <p v-else-if="usedNumbers.size >= BALLS" class="text-6xl font-bold uppercase">{{ $t('home.gameOverTitle') }}</p>
       <div class="flex flex-col gap-5">
         <Button @click="RestartGame" variant="default">{{ $t('home.restart') }}</Button>
         <Button @click="QuitGame" variant="secondary">{{ $t('home.quit') }}</Button>
