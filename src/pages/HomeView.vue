@@ -44,7 +44,7 @@ function RestartGame() {
 }
 
 function handleKeyPress(event: KeyboardEvent) {
-  if(event.code === 'Space') {
+  if(event.code === 'Space' && !gameFinished.value) {
     gameFinished.value = true
     ShootConfettis()
     if (intervalId) {
