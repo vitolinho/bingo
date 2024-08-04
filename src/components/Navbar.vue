@@ -1,5 +1,9 @@
+<script setup lang="ts">
+import { isMobile, isTablet } from '@/utils/userAgent'
+</script>
+
 <template>
-  <nav class="absolute top-0 w-full flex justify-between items-center px-5 py-10 backdrop-blur-md border-b border-neutral-300 md:px-20">
+  <nav v-if="!isMobile && !isTablet" class="absolute top-0 w-full flex justify-between items-center px-5 py-10 backdrop-blur-md border-b border-neutral-300 md:px-20">
     <img src="../assets/logo.png" alt="logo" class="w-12">
     <div class="flex gap-5">
       <RouterLink to="/" v-if="$route.fullPath === '/'" class="font-bold">Home</RouterLink>

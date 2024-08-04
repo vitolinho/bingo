@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button'
 import { GenerateRandomNumber } from '../utils/number'
 import { ShootConfettis } from '@/utils/confetti'
 import { speak } from '@/utils/SpeechSynthesisUtterance'
+import { isMobile, isTablet } from '@/utils/userAgent'
 
 const gameStarted = ref(false)
 const gameFinished = ref(false)
@@ -66,7 +67,8 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="w-full h-screen flex justify-center items-center">
+  <p v-if="isMobile || isTablet" class="w-full h-screen flex justify-center items-center">This website is not available for mobiles or tablets.</p>
+  <div v-else class="w-full h-screen flex justify-center items-center">
     <Button v-if="!gameStarted" @click="startGame">Play !</Button>
     <p v-if="gameStarted && randomNumber !== 0 && !gameFinished" class="text-9xl font-bold">{{ randomNumber }}</p>
     <div v-if="gameFinished" class="flex flex-col gap-20 w-full justify-center items-center">
