@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, watch } from 'vue'
 import { Button } from '@/components/ui/button'
+import { Label } from '@/components/ui/label'
 import { GenerateRandomNumber } from '../utils/number'
 import { ShootConfettis } from '@/utils/confetti'
 import { speak } from '@/utils/SpeechSynthesisUtterance'
@@ -46,7 +47,7 @@ function RestartGame() {
 }
 
 function handleKeyPress(event: KeyboardEvent) {
-  if(event.code === 'Space' && !gameFinished.value) {
+  if(event.code === 'Space' && !gameFinished.value && gameStarted.value) {
     gameFinished.value = true
     ShootConfettis()
     if (intervalId) {
@@ -76,7 +77,10 @@ watch(language, (newLanguage) => {
   <p v-if="isMobile || isTablet" class="w-full h-screen flex justify-center items-center">This website is not available for mobiles or tablets.</p>
   <div v-else class="w-full h-screen flex justify-center items-center">
     <Button v-if="!gameStarted" @click="startGame">{{ $t('home.play') }}</Button>
-    <p v-if="gameStarted && randomNumber !== 0 && !gameFinished" class="text-9xl font-bold">{{ randomNumber }}</p>
+    <div v-if="gameStarted && randomNumber !== 0 && !gameFinished" class="flex flex-col items-center gap-5">
+      <p class="text-9xl font-bold">{{ randomNumber }}</p>
+      <Label>{{ $t('home.label') }}</Label>
+    </div>
     <div v-if="gameFinished" class="flex flex-col gap-20 w-full justify-center items-center">
       <p class="text-6xl font-bold uppercase">BINGO</p>
       <div class="flex flex-col gap-5">
