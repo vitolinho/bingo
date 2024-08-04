@@ -19,7 +19,6 @@ const router = createRouter({
 })
 
 const storedLanguage = ref(localStorage.getItem('language') || 'en')
-console.log(storedLanguage.value)
 const i18n = createI18n({
   locale: String(storedLanguage.value),
   fallbackLocale: 'en',
