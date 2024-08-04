@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, watch } from 'vue'
 import { Button } from '@/components/ui/button'
 import { GenerateRandomNumber } from '../utils/number'
 import { ShootConfettis } from '@/utils/confetti'
@@ -9,6 +9,7 @@ import { isMobile, isTablet } from '@/utils/userAgent'
 const gameStarted = ref(false)
 const gameFinished = ref(false)
 const randomNumber = ref(0)
+const language = ref(localStorage.getItem('language') || 'english')
 let intervalId: any = null
 
 function startGame() {
@@ -21,7 +22,8 @@ function startGame() {
 
 function nextNumber() {
   randomNumber.value = GenerateRandomNumber()
-  speak(String(randomNumber.value), 'fr-FR', () => {
+  const speakLanguage = language.value === 'english' ? 'en-US' : 'fr-FR'
+  speak(String(randomNumber.value), speakLanguage, () => {
     if (gameStarted.value && !gameFinished.value) {
       intervalId = setTimeout(nextNumber, 1000)
     }
@@ -63,6 +65,10 @@ onUnmounted(() => {
   if (intervalId) {
     clearInterval(intervalId)
   }
+})
+
+watch(language, (newLanguage) => {
+  localStorage.setItem('language', newLanguage)
 })
 </script>
 
