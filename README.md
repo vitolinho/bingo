@@ -1,5 +1,13 @@
-# Vue 3 + TypeScript + Vite
+# Bingo-iza
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+A Bingo 75 website that can generate bingo grids and play a game !
 
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+## Set up locally
+Get started locally with these commands:<br>
+`pnpm install`<br>
+`pnpm dev`
+
+## Stack
+Bingo-iza stack:
+- [Typescript](https://www.typescriptlang.org/) - Programming Language
+- [Vue.js](https://vuejs.org/) - JavaScript Library
